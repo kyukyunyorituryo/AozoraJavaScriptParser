@@ -1,4 +1,4 @@
-const AozoraText2Html = (text, cur_command = "title") => {
+const AozoraText2Html = (text, cur_command = "") => {
 	// 正規表現エスケープ
 	const reRegExp = /[\\^$.*+?()[\]{}|]/g
 	const reHasRegExp = new RegExp(reRegExp.source)
@@ -71,16 +71,16 @@ const AozoraText2Html = (text, cur_command = "title") => {
 	const toHanNum = number => number.replace(re_number_list, all => number_list[all])
 	// 青空文庫一覧
 	const command_list = {
-		"大見出し": { class: "o-midashi", tag: "h3" },
-		"中見出し": { class: "naka-midashi", tag: "h4" },
-		"小見出し": { class: "ko-midashi", tag: "h5" },
-		"同行大見出し": { class: "dogyo-o-midashi", tag: "h3" },
-		"同行中見出し": { class: "dogyo-naka-midashi", tag: "h4" },
-		"同行小見出し": { class: "dogyo-ko-midashi", tag: "h5" },
-		"窓大見出し": { class: "mado-o-midashi", tag: "h3" },
-		"窓中見出し": { class: "mado-naka-midashi", tag: "h4" },
-		"窓小見出し": { class: "mado-ko-midashi", tag: "h5" },
-		"縦中横": { class: "tatechuyoko", tag: "span" },
+		"大見出し": { class: "o-midashi", tag: "h1" },
+		"中見出し": { class: "naka-midashi", tag: "h2" },
+		"小見出し": { class: "ko-midashi", tag: "h3" },
+		"同行大見出し": { class: "dogyo-o-midashi", tag: "h1" },
+		"同行中見出し": { class: "dogyo-naka-midashi", tag: "h2" },
+		"同行小見出し": { class: "dogyo-ko-midashi", tag: "h3" },
+		"窓大見出し": { class: "mado-o-midashi", tag: "h1" },
+		"窓中見出し": { class: "mado-naka-midashi", tag: "h2" },
+		"窓小見出し": { class: "mado-ko-midashi", tag: "h3" },
+		"縦中横": { class: "tcy", tag: "span" },
 		"傍点": { class: "sesame_dot", tag: "em" },
 		"白ゴマ傍点": { class: "white_sesame_dot", tag: "em" },
 		"丸傍点": { class: "black_circle", tag: "em" },
@@ -430,7 +430,7 @@ const AozoraText2Html = (text, cur_command = "title") => {
 		} else if (text_arr.length > 0 && chr_arr_length == 0 || text.match(/^<(?:h[0-9]+|div)/i)) {
 			text_list.push(`${text}`)
 		} else {
-			text_list.push(`${text}<br />`)
+			text_list.push(`<p>${text}</p>`)
 		}
 	}
 	return text_list.join("")
